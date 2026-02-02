@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIET Student Fee Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border: 2px solid #000;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000;
+            margin-bottom: 5px;
+            margin-top: 0;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border: 2px solid #000;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .fee-section {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .fee-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        label {
+            cursor: pointer;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: #2196F3;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #1976D2;
+        }
+
+        .clear-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background: #d32f2f;
+        }
+
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/mnt/user-data/uploads/KIET-Logo_jpg.jpeg" alt="KIET Logo" class="logo">
+        <h1>KIET</h1>
+        <h2>Student Fee Form</h2>
+        
+        <div class="success-message" id="successMessage">
+            Receipt data submitted successfully! ✓
+        </div>
+
+        <form id="receiptForm">
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="session">Session *</label>
+                    <input type="text" id="session" name="session" placeholder="e.g., 2025-2026" required>
+                    <span class="error" id="sessionError">Session is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Year *</label>
+                    <select id="year" name="year" required>
+                        <option value="">Select Year</option>
+                        <option value="I">I</option>
+                        <option value="II">II</option>
+                        <option value="III">III</option>
+                        <option value="IV">IV</option>
+                    </select>
+                    <span class="error" id="yearError">Year is required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="studentName">Student Name *</label>
+                <input type="text" id="studentName" name="studentName" required>
+                <span class="error" id="studentNameError">Student name is required</span>
+            </div>
+
+            <div class="form-group">
+                <label for="fatherName">Father's Name *</label>
+                <input type="text" id="fatherName" name="fatherName" required>
+                <span class="error" id="fatherNameError">Father's name is required</span>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="registrationNo">Registration No *</label>
+                    <input type="text" id="registrationNo" name="registrationNo" required>
+                    <span class="error" id="registrationNoError">Registration number is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="batch">Batch *</label>
+                    <input type="text" id="batch" name="batch" placeholder="e.g., 2024-2028" required>
+                    <span class="error" id="batchError">Batch is required</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="course">Course *</label>
+                    <input type="text" id="course" name="course" placeholder="e.g., B TECH" required>
+                    <span class="error" id="courseError">Course is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Branch *</label>
+                    <input type="text" id="branch" name="branch" placeholder="e.g., CSIT" required>
+                    <span class="error" id="branchError">Branch is required</span>
+                </div>
+            </div>
+
+            
+            <div class="fee-section">
+                <h3>Fee Details</h3>
+
+                <div class="form-group">
+                    <label for="tuitionFee">Tuition Fee *</label>
+                    <input type="number" id="tuitionFee" name="tuitionFee" step="0.01" min="0" required>
+                    <span class="error" id="tuitionFeeError">Valid tuition fee is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="hostelOpted" name="hostelOpted" onchange="toggleHostelFee()">
+                        Hostel Opted
+                    </label>
+                </div>
+
+                <div class="form-group" id="hostelFeeGroup" style="display: none;">
+                    <label for="hostelFee">Hostel Fee *</label>
+                    <input type="number" id="hostelFee" name="hostelFee" step="0.01" min="0">
+                    <span class="error" id="hostelFeeError">Valid hostel fee is required</span>
+                </div>
+            </div>
+
+            
+            <div class="row">
+                <div class="form-group">
+                    <label for="transactionId">Transaction ID *</label>
+                    <input type="text" id="transactionId" name="transactionId" required>
+                    <span class="error" id="transactionIdError">Transaction ID is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentDate">Date of Payment *</label>
+                    <input type="date" id="paymentDate" name="paymentDate" required>
+                    <span class="error" id="paymentDateError">Date of payment is required</span>
+                </div>
+            </div>
+
+            
+            <div class="buttons">
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('receiptForm');
+        const successMessage = document.getElementById('successMessage');
+        function validateForm() {
+            let isValid = true;
+
+            document.querySelectorAll('.error').forEach(error => {
+                error.classList.remove('show');
+            });
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    const errorElement = document.getElementById(field.id + 'Error');
+                    if (errorElement) {
+                        errorElement.classList.add('show');
+                    }
+                    isValid = false;
+                }
+            });
+            const numericFields = ['tuitionFee'];
+            const hostelOpted = document.getElementById('hostelOpted').checked;
+            if (hostelOpted) {
+                numericFields.push('hostelFee');
+            }
+            
+            numericFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                const value = parseFloat(field.value);
+                
+                if (field.value && (isNaN(value) || value < 0)) {
+                    const errorElement = document.getElementById(fieldId + 'Error');
+                    if (errorElement) {
+                        errorElement.textContent = 'Please enter a valid positive number';
+                        errorElement.classList.add('show');
+                    }
+                    isValid = false;
+                }
+            });
+            const session = document.getElementById('session').value;
+            const sessionPattern = /^\d{4}-\d{4}$/;
+            if (session && !sessionPattern.test(session)) {
+                document.getElementById('sessionError').textContent = 'Session format should be YYYY-YYYY';
+                document.getElementById('sessionError').classList.add('show');
+                isValid = false;
+            }
+            const batch = document.getElementById('batch').value;
+            if (batch && !sessionPattern.test(batch)) {
+                document.getElementById('batchError').textContent = 'Batch format should be YYYY-YYYY';
+                document.getElementById('batchError').classList.add('show');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+        function calculateTotal() {
+            let total = parseFloat(document.getElementById('tuitionFee').value) || 0;
+            
+            const hostelOpted = document.getElementById('hostelOpted').checked;
+            if (hostelOpted) {
+                total += parseFloat(document.getElementById('hostelFee').value) || 0;
+            }
+
+            return total;
+        }
+
+        function toggleHostelFee() {
+            const hostelOpted = document.getElementById('hostelOpted').checked;
+            const hostelFeeGroup = document.getElementById('hostelFeeGroup');
+            const hostelFeeInput = document.getElementById('hostelFee');
+            
+            if (hostelOpted) {
+                hostelFeeGroup.style.display = 'block';
+                hostelFeeInput.required = true;
+            } else {
+                hostelFeeGroup.style.display = 'none';
+                hostelFeeInput.required = false;
+                hostelFeeInput.value = '';
+            }
+        }
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                data.totalFee = calculateTotal();
+                data.amountPaid = data.totalFee;
+                data.dueAmount = 0;
+                console.log('Receipt Data:', data);
+                successMessage.classList.add('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 3000);
+
+                
+            }
+        });
+
+        
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all fields?')) {
+                form.reset();
+                document.querySelectorAll('.error').forEach(error => {
+                    error.classList.remove('show');
+                });
+                successMessage.classList.remove('show');
+            }
+        }
+
+        
+        form.querySelectorAll('input, select').forEach(field => {
+            field.addEventListener('blur', function() {
+                const errorElement = document.getElementById(this.id + 'Error');
+                if (errorElement) {
+                    if (!this.value.trim() && this.required) {
+                        errorElement.classList.add('show');
+                    } else {
+                        errorElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
